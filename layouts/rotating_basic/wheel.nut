@@ -19,7 +19,7 @@ function wheelUpdate()
         wheel.shader = titleShader;
         if (wheel.texture_height != 0 && wheel.texture_width != 0)
         {
-            wheel.height = (wheel.width * (wheel.texture_height / wheel.texture_width));
+            wheel.height = (wheel.width * (wheel.texture_height * 1.0 / wheel.texture_width));
         }
 }
 

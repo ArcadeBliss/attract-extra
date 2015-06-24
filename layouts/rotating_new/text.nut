@@ -91,10 +91,10 @@ function textUpdate_Horz()
 
 function textUpdate_Vert()
 {
-    romListSurf.width = (overlay_vert.width / 2);
+    romListSurf.width = (overlay_vert.width / 2.0);
     romListSurf.height = (overlay_vert.height / 4.5);
 //     romListSurf.x = (overlay_vert.x + (overlay_vert.width / 32));
-    romListSurf.x = (overlay_vert.width + 50);
+    romListSurf.x = (overlay_vert.width + 50.0);
     romListSurf.y = (overlay_vert.y);
     
     gameList.width = (overlay_vert.width / 3.92);
@@ -104,8 +104,8 @@ function textUpdate_Vert()
     gameList.charsize = 26;
     
     local left_X = (overlay_vert.x + (overlay_vert.width / 6.7));
-    local left_W = (overlay_vert.width / 2);
-    local left_H = (overlay_vert.height / 30);
+    local left_W = (overlay_vert.width / 2.0);
+    local left_H = (overlay_vert.height / 30.0);
     local pos1_Y = (overlay_vert.y + (overlay_vert.height / 1.23));
     local pos2_Y = (overlay_vert.y + (overlay_vert.height / 1.18));
     local pos3_Y = (overlay_vert.y + (overlay_vert.height / 1.13));

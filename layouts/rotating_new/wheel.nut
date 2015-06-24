@@ -16,7 +16,7 @@ function wheelUpdate_Horz()
     // This keeps the original ratio
     //if (wheel.texture_height != 0 && wheel.texture_width != 0)
     //{
-    //    wheel.width = (wheel.height * (wheel.texture_height / wheel.texture_width));
+    //    wheel.width = (wheel.height * (wheel.texture_height * 1.0 / wheel.texture_width));
     //}            
     wheel.x = overlay_horz.x + (overlay_horz.width / 1.83);
     wheel.y = overlay_horz.y + (overlay_horz.height / 7.5);
@@ -32,7 +32,7 @@ function wheelUpdate_Vert()
     // This keeps the original ratio
     //if (wheel.texture_height != 0 && wheel.texture_width != 0)
     //{
-    //    wheel.width = (wheel.height * (wheel.texture_height / wheel.texture_width));
+    //    wheel.width = (wheel.height * (wheel.texture_height * 1.0 / wheel.texture_width));
     //}
     wheel.x = overlay_vert.x + (overlay_vert.width / 7.16);
     wheel.y = overlay_vert.y + (overlay_vert.height / 21.3);
