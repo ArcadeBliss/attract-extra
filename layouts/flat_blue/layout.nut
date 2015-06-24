@@ -1,9 +1,10 @@
+//
 class UserConfig {
 	</ label="Game Tile Artwork", help="The artwork used for the tiles", options="snap,title,video,movie" />
 	game_tile_art="snap";
 
 	</ label="Shaders Enabled", help="Enable Shaders on Artwork (requires shader support)", options="Yes,No" />
-	enable_shaders="Yes";
+	enable_shaders="No";
 	
 	</ label="Game Tile Shader", help="Choose a shader for the tiles", options="Scanlines,Bloom,None" />
 	game_tile_shader_choice="None";
