@@ -1,4 +1,3 @@
-//
 class UserConfig {
 	</ label="Game Tile Artwork", help="The artwork used for the tiles", options="snap,title,video,movie" />
 	game_tile_art="snap";
@@ -98,8 +97,8 @@ if (screenType.aspect == "4:3"){
     build_layout("BG_Vert_4:3",   "horizontal", "4:3",   [1600.0, 1200.0], 11.0);
     build_layout("BG_Vert_4:3",   "vertical",   "4:3",   [1200.0, 1600.0], 13.0);
 } else if (screenType.aspect == "16:10"){
-    build_layout("BG_Horz_16:10", "horizontal", "16:10", [1920.0, 1080.0], 11.0);
-    build_layout("BG_Vert_16:10", "vertical",   "16:10", [1080.0, 1920.0], 15.0);
+    build_layout("BG_Horz_16:10", "horizontal", "16:10", [1920.0, 1200.0], 11.0);
+    build_layout("BG_Vert_16:10", "vertical",   "16:10", [1200.0, 1920.0], 15.0);
 } else if (screenType.aspect == "16:9"){
     build_layout("BG_Horz_16:9",  "horizontal", "16:9",  [1920.0, 1080.0], 9.0);
     build_layout("BG_Vert_16:9",  "vertical",   "16:9",  [1080.0, 1920.0], 15.0);
