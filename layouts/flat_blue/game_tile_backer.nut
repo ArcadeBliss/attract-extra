@@ -7,6 +7,7 @@
 class GametileBacker extends Final_Renderer
 {
     refWidth = null;
+    created = 0;
     constructor( idi, orientationi, aspecti, imagefile)
     {
         descriptor = "GametileBacker";
@@ -14,9 +15,14 @@ class GametileBacker extends Final_Renderer
         orientation = orientationi;  // Should be labels only
         aspect = aspecti;            // and used to determine 
         // Find linked background to use as display res coords.
+        print("GametileBacker searching for BG_Surface\n");
+        print("ID :"+id+" Orientation :"+orientation+" Aspect :"+aspect+"\n");
         foreach (obj in objectList) {
             if (obj.descriptor == "BG_Surface") {
+                print("Found BG_Surface at :"+obj+"\n");
                 if ( obj.id == id && obj.orientation == orientation && obj.aspect == aspect) {
+                    print("Linked to BG_Surface at address :"+obj+" with properties\n");
+                    print("ID :"+obj.id+" Orientation :"+obj.orientation+" Aspect :"+obj.aspect+"\n");
                     displaySurface = obj;
                     break;
                 }
@@ -29,18 +35,23 @@ class GametileBacker extends Final_Renderer
     function update()
     {
         if (refWidth == null || refWidth == 0) {
+            print("Update : GametileBacker searching for GameTile\n");
+            print("ID :"+id+" Orientation :"+orientation+" Aspect :"+aspect+"\n");
             foreach (obj in objectList) {
                 if (obj.descriptor == "GameTile" && obj.id == id && obj.offset != 0 &&
                     obj.orientation == orientation && obj.aspect == aspect ) {
-                    refWidth = obj.surf.width;
+                    print("Setting refWidth to "+obj.surf.width+" from GameTile "+obj+"\n");
+                    art.width = refWidth = obj.surf.width;
                     break;
                 }
             }
         }
-        art.x = displaySurface.surf.x;
-        art.y = displaySurface.surf.y;
-        art.width = refWidth;
-        art.height = displaySurface.surf.height;
+        if (created == 0){
+            art.x = displaySurface.surf.x;
+            art.y = displaySurface.surf.y;
+            art.height = displaySurface.surf.height;
+            created = 1;
+        }
     }
     /////////////////////////
     function setVisible(flag)

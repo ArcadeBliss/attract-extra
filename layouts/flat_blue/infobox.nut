@@ -14,6 +14,7 @@ class Infobox extends Final_Renderer
     manu = null;
     x = null;
     y = null;
+    created = 0;
     //////////////////////////
     constructor(idi, orientationi, aspecti, rezi, artFilei, xi, yi)
     {
@@ -25,10 +26,14 @@ class Infobox extends Final_Renderer
         x = xi;                      // which obj to update
         y = yi;
         rez = rezi; // reference res that element was set up with
-        // Find linked background to use as display res coords.
+        print("Infobox searching for BG_Surface\n");
+        print("ID :"+id+" Orientation :"+orientation+" Aspect :"+aspect+"\n");
         foreach (obj in objectList) { // Horrible coding style, only for convieniance.
             if (obj.descriptor == "BG_Surface") {
+                print("Found BG_Surface at :"+obj+"\n")
                 if ( obj.id == id && obj.orientation == orientation && obj.aspect == aspect) {
+                    print("Linked to BG_Surface at address :"+obj+" with properties\n");
+                    print("ID :"+obj.id+" Orientation :"+obj.orientation+" Aspect :"+obj.aspect+"\n");
                     displaySurface = obj;
                     break;
         } } }
@@ -37,9 +42,13 @@ class Infobox extends Final_Renderer
         // Set up the surface //
         ////////////////////////
         // Set Infobox height to match the game refHeight
+        print("Infobox searching for BG_Surface\n");
         foreach (obj in objectList) {
             if (obj.descriptor == "GameTile" && obj.orientation == orientation && obj.aspect == aspect && obj.id == id) {
+                print("Found GameTile at "+obj+" with properties\n");
+                print("ID :"+obj.id+" Orientation :"+obj.orientation+" Aspect :"+obj.aspect+"\n");
                 refHeight = obj.surf.height * 2.0;
+                print("Setting height to "+refHeight+"\n");
                 break;
             }
         }
@@ -73,22 +82,25 @@ class Infobox extends Final_Renderer
     //////////////////////////
     function update()
     {
-        surf.height = refHeight;
-        surf.width = refWidth;
-        if (x == "snapLeft") {
-            surf.x = (displaySurface.surf.x);
-        } else if (x == "snapRight") {
-            surf.x = (displaySurface.surf.x + (displaySurface.surf.width - surf.width));
-        } else {
-            surf.x = (displaySurface.surf.x + (displaySurface.surf.width / (rez[0] / x) ));
-        }
-        
-        if (y == "snapTop") {
-            surf.y = (displaySurface.surf.y);
-        } else if (y == "snapBottom") {
-            surf.y = (displaySurface.surf.y + (displaySurface.surf.height - surf.height));
-        } else {
-            surf.y = (displaySurface.surf.y + (displaySurface.surf.height / (rez[1] / y) ));
+        if (created == 0){
+            surf.height = refHeight;
+            surf.width = refWidth;
+            if (x == "snapLeft") {
+                surf.x = (displaySurface.surf.x);
+            } else if (x == "snapRight") {
+                surf.x = (displaySurface.surf.x + (displaySurface.surf.width - surf.width));
+            } else {
+                surf.x = (displaySurface.surf.x + (displaySurface.surf.width / (rez[0] / x) ));
+            }
+            
+            if (y == "snapTop") {
+                surf.y = (displaySurface.surf.y);
+            } else if (y == "snapBottom") {
+                surf.y = (displaySurface.surf.y + (displaySurface.surf.height - surf.height));
+            } else {
+                surf.y = (displaySurface.surf.y + (displaySurface.surf.height / (rez[1] / y) ));
+            }
+            created = 1;
         }
     }
     //////////////////////////

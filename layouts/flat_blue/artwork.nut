@@ -12,17 +12,26 @@ class Artwork extends Final_Renderer
         orientation = orientationi;
         aspect = aspecti;
         // Find linked background to use as display res coords.
+        print("Artwork searching for BG_Surface\n");
+        print("ID :"+id+" Orientation :"+orientation+" Aspect :"+aspect+"\n");
         foreach (obj in objectList) {
             if (obj.descriptor == "BG_Surface") {
+                print("Found BG_Surface at :"+obj+"\n");
                 if ( obj.id == id && obj.orientation == orientation && obj.aspect == aspect) {
+                    print("Linked to BG_Surface at address :"+obj+" with properties\n");
+                    print("ID :"+obj.id+" Orientation :"+obj.orientation+" Aspect :"+obj.aspect+"\n");
                     displaySurface = obj;
                     break;
                 }
             }
         }
+        print("Artwork searching for BG_Wallpaper\n");
         foreach (obj in objectList) {
             if (obj.descriptor == "BG_Wallpaper") {
+                print("Found BG_Wallpaper at :"+obj+"\n");
                 if ( obj.id == id && obj.orientation == orientation && obj.aspect == aspect) {
+                    print("Linked to BG_Wallpaper at address :"+obj+" with properties\n");
+                    print("ID :"+obj.id+" Orientation :"+obj.orientation+" Aspect :"+obj.aspect+"\n");
                     displayRef = obj;
                     break;
                 }
@@ -35,16 +44,6 @@ class Artwork extends Final_Renderer
     function update()
     {
         local gameInfo = fe.game_info(Info.Rotation);
-        if (x == null || x == 0) {
-            foreach (obj in objectList) {
-                if (obj.descriptor == "GametileBacker") {
-                    if ( obj.id == id && obj.orientation == orientation && obj.aspect == aspect) {
-                        x = obj.art.width;
-                        break;
-                    }
-                }
-            }
-        }
         
         if (screenType.orientation == "horizontal"){
             if (gameInfo == "0" || gameInfo == "180"){
@@ -55,7 +54,7 @@ class Artwork extends Final_Renderer
                 } 
                 else {
                     art.height = displayRef.art.height;
-                    art.width = displayRef.art.width - x;
+                    art.width = displayRef.art.width;
                     art.x = displayRef.art.x + (displayRef.art.width*1.0 / 2) - (art.width*1.0 / 2);
                 }
             } 

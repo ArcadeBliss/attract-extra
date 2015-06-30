@@ -45,6 +45,8 @@ uniform float brightMult;
 uniform float aperature_type;
 uniform float bloom_on;
 
+uniform float CRT_geom;
+
 const vec3 gammaBoost = vec3(1.0/1.2, 1.0/1.2, 1.0/1.2);//An extra per channel gamma adjustment applied at the end.
 
 //Here are the Tint/Saturation/GammaContrastBoost Variables.  Comment out "#define YUV" and "#define GAMMA_CONTRAST_BOOST" to disable these altogether.
@@ -227,9 +229,15 @@ float corner(vec2 coord)
 // Entry.
 void main(void)
 {
-    vec2 pos = radialDistortion(texCoord); // Curvature
-    //gl_FragColor.rgb *= vec3(corner(pos));
-    gl_FragColor.rgb = Tri(pos) * Mask(gl_FragCoord.xy) * vec3(corner(pos));
+    vec2 pos;
+    if (CRT_geom == 1.0){
+        pos = radialDistortion(texCoord); // Curvature
+        gl_FragColor.rgb = Tri(pos) * Mask(gl_FragCoord.xy) * vec3(corner(pos));
+    }
+    else {
+        pos = gl_TexCoord[0].xy; // Curvature
+        gl_FragColor.rgb = Tri(pos) * Mask(gl_FragCoord.xy) * vec3(corner(pos));
+    }
     if (bloom_on == 1.0){
         gl_FragColor.rgb += Bloom(pos) * bloomAmount;
     }

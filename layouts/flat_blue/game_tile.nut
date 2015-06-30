@@ -9,6 +9,7 @@ class GameTile extends Final_Renderer
     refWidth = null;
     refArt = null;
     offset = null;
+    created = 0;
     //////////////////////////
     constructor(idi, orientationi, aspecti, rez, artFile, gameTileCount, gameOffset)
     {
@@ -54,15 +55,26 @@ class GameTile extends Final_Renderer
     //////////////////////////
     function update()
     {
-        // Base_Image, Sel_Offset, Art, Text
-        surf.x = displaySurface.surf.x;
-        if (title.index_offset == 0) {
-            surf.y = displaySurface.surf.y + (displaySurface.surf.height / 2) - (surf.height /2);
-        } else {
-            foreach (obj in objectList) {
-                if (obj.orientation == orientation && obj.aspect == aspect){
-                    if (obj.descriptor == "GameTile" && obj.title.index_offset == 0) {
-                        surf.y = obj.surf.y + (obj.surf.height * (title.index_offset) );
+        if (created == 0){
+            // Base_Image, Sel_Offset, Art, Text
+            surf.x = displaySurface.surf.x;
+            if (title.index_offset == 0) {
+                surf.y = displaySurface.surf.y + (displaySurface.surf.height / 2) - (surf.height /2);
+                print("Update : Created first GameTile at Y = "+surf.y+"\n");
+                print("ID :"+id+" Orientation :"+orientation+" Aspect :"+aspect+"\n");
+                created = 1;
+            } else {
+                print("Update : Creating offset GameTile\n");
+                print("ID :"+id+" Orientation :"+orientation+" Aspect :"+aspect+"\n");
+                foreach (obj in objectList) {
+                    if (obj.orientation == orientation && obj.aspect == aspect){
+                        if (obj.descriptor == "GameTile" && obj.title.index_offset == 0) {
+                            print("Linking Gametile offset "+offset+" to center tile at "+obj+"\n");
+                            surf.y = obj.surf.y + (obj.surf.height * (title.index_offset) );
+                            print("GameTile Y = "+surf.y+"\n");
+                            created = 1;
+                            break;
+                        }
                     }
                 }
             }

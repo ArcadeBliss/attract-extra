@@ -65,6 +65,7 @@ class First_Renderer extends Final_Renderer
             if (obj.descriptor == "Final_Render") {
                 print("Found final render surface = "+obj+"\n");
                 if ( obj.id == id && obj.orientation == orientation && obj.aspect == aspect) {
+                    print("Linked to object at address :"+obj+"\n");
                     displaySurface = obj;
                     break;
                 }
